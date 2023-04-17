@@ -1,0 +1,38 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Petstore
+  license:
+    name: MIT
+servers:
+  - url:  http://127.0.0.1
+paths:
+  /login:
+    get:
+      summary: used for login
+      operationId: login
+      tags:
+        - login
+      parameters:
+        - uname: username
+          passw: password
+          description: login to the system
+          required: True
+      responses:
+        '200':
+          description: Succussfuly logged in
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pets"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
